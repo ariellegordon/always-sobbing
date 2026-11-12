@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1f6f5c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Sob">
+  <title>Sob</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="counter">
+      <div class="counter-num" id="overall-days">0</div>
+      <div class="counter-label" id="overall-label">days free</div>
+    </div>
+    <div class="chips" id="substance-streaks"></div>
+  </header>
+
+  <nav>
+    <button data-view="log" class="active">Log</button>
+    <button data-view="history">History</button>
+    <button data-view="settings">Settings</button>
+  </nav>
+
+  <main>
+    <!-- Daily log -->
+    <section id="view-log" class="view">
+      <div class="date-nav">
+        <button id="prev-day" aria-label="Previous day">‹</button>
+        <input type="date" id="log-date">
+        <button id="next-day" aria-label="Next day">›</button>
+      </div>
+
+      <form id="entry-form" class="card">
+        <select id="entry-substance" required></select>
+        <input id="entry-amount" type="number" inputmode="decimal" min="0" step="any" placeholder="Amount" required>
+        <span id="entry-unit" class="unit"></span>
+        <button type="submit">Add</button>
+      </form>
+      <p id="no-substances" class="hint" hidden>Add a substance in <a href="#" data-goto="settings">Settings</a> to start logging.</p>
+
+      <div id="day-summary"></div>
+      <ul id="day-entries" class="list"></ul>
+    </section>
+
+    <!-- History -->
+    <section id="view-history" class="view" hidden>
+      <ul id="history-list" class="list"></ul>
+    </section>
+
+    <!-- Settings -->
+    <section id="view-settings" class="view" hidden>
+      <h2>Substances</h2>
+      <form id="substance-form" class="card">
+        <input id="sub-name" placeholder="Name (e.g. Alcohol)" required>
+        <input id="sub-unit" placeholder="Unit (e.g. drinks)" required>
+        <button type="submit">Add</button>
+      </form>
+      <ul id="substance-list" class="list"></ul>
+
+      <h2>Tracking since</h2>
+      <p class="hint">If nothing is logged yet, the counters count from this date.</p>
+      <input type="date" id="tracking-since" class="card">
+
+      <h2>Backup</h2>
+      <div class="row">
+        <button id="export-btn">Export JSON</button>
+        <label class="button">Import JSON<input type="file" id="import-file" accept="application/json,.json" hidden></label>
+      </div>
+      <p class="hint">Your data is stored only in this browser. Export it now and then to keep a backup.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
